@@ -40,7 +40,7 @@ The `ContractTest` class demonstrates how to use Specmatic to test **specmatic-o
       - Run the application using `./gradlew bootRun`
       - Run the tests
       ```shell
-      docker run --network host -v "$(pwd)/specmatic.yaml:/usr/src/app/specmatic.yaml" -v "$(pwd)/build/reports/specmatic:/usr/src/app/build/reports/specmatic" -v "$PWD/src/test/resources/specmatic:/usr/src/app/examples" -e SPECMATIC_GENERATIVE_TESTS=true znsio/specmatic-grpc-trial test --port=9090 --host=host.docker.internal --examples=examples
+      docker run --network host -v "$(pwd)/specmatic.yaml:/usr/src/app/specmatic.yaml" -v "$(pwd)/build/reports/specmatic:/usr/src/app/build/reports/specmatic" -v "$PWD/src/test/resources/specmatic:/usr/src/app/examples" -e SPECMATIC_GENERATIVE_TESTS=true znsio/specmatic-grpc test --port=9090 --host=host.docker.internal --examples=examples
       ```
 
 5. In case you want to run just the gRPC server using Gradle you can execute
