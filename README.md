@@ -19,7 +19,7 @@ The `ContractTest` class demonstrates how to use Specmatic to test **specmatic-o
 1. Clone the repository
 
    ```shell
-   git clone https://github.com/znsio/specmatic-order-api-grpc-kotlin
+   git clone https://github.com/specmatic/specmatic-order-api-grpc-kotlin
    ```
 
 2. Initialize and update the `specmatic-order-contracts` submodule
