@@ -1,5 +1,6 @@
 package com.store.specmatic_order_api_grpc.controller
 
+import com.google.protobuf.Empty
 import com.store.order.proto.*
 import com.store.specmatic_order_api_grpc.model.OrderDB
 
@@ -35,6 +36,11 @@ class Orders : OrderServiceGrpc.OrderServiceImplBase() {
     override fun deleteOrder(request: OrderId, responseObserver: StreamObserver<OrderResponse>) {
         OrderDB.deleteOrder(request)
         responseObserver.onNext(OrderResponse.newBuilder().setMessage("Success").build())
+        responseObserver.onCompleted()
+    }
+
+    override fun emptyOrder(request: Empty?, responseObserver: StreamObserver<Empty>) {
+        responseObserver.onNext(Empty.newBuilder().build())
         responseObserver.onCompleted()
     }
 }
