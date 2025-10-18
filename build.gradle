@@ -2,7 +2,7 @@ import org.gradle.plugins.ide.eclipse.model.SourceFolder
 
 buildscript {
     ext {
-        protobufVersion = '3.23.4'
+        protobufVersion = '4.32.1'
         protobufPluginVersion = '0.8.18'
         grpcVersion = '1.63.0'
         springBootVersion = '3.3.1'
