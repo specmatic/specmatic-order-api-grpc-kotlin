@@ -8,7 +8,9 @@ The **specmatic-order-api-grpc-kotlin** is a gRPC server application developed a
 * [order.proto](https://github.com/specmatic/specmatic-order-contracts/blob/main/io/specmatic/examples/store/grpc/order_api/order.proto)
 * [product.proto](https://github.com/specmatic/specmatic-order-contracts/blob/main/io/specmatic/examples/store/grpc/order_api/product.proto)
 
-The `ContractTest` class demonstrates how to use Specmatic to test **specmatic-order-api-grpc-kotlin** gRPC server app using the above proto files.
+The `ContractTest` class uses our JUnit extension to demonstrate how to use Specmatic to test **specmatic-order-api-grpc-kotlin** gRPC server app using the above proto files.
+
+If you want to use Docker via TestContainers then you can refer to the `ContractTestUsingTestContainer` class.
 
 ## Requirements
 
@@ -45,6 +47,6 @@ The `ContractTest` class demonstrates how to use Specmatic to test **specmatic-o
 
 5. In case you want to run just the gRPC server using Gradle you can execute
 
-   ```shell
-   ./gradlew bootRun
-   ```
+```shell
+./gradlew bootRun
+```

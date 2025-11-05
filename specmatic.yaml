@@ -1,6 +1,7 @@
-sources:
-  - provider: git
-    repository: https://github.com/specmatic/specmatic-order-contracts
-    test:
+version: 2
+contracts:
+  - git:
+      url: https://github.com/specmatic/specmatic-order-contracts
+    provides:
       - io/specmatic/examples/store/grpc/order_api/order.proto
       - io/specmatic/examples/store/grpc/order_api/product.proto
