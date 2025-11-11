@@ -27,6 +27,7 @@ class ContractTestUsingTestContainer {
                 "--port=9090",
                 "--examples=./src/test/resources/specmatic",
                 "--protoc-version=3.23.4",
+                "--import-path=../"
             ).withEnv(SPECMATIC_GENERATIVE_TESTS, "true")
             .withFileSystemBind(
                 "./src/test/resources/specmatic",
