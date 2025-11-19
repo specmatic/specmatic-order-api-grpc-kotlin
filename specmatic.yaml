@@ -5,3 +5,7 @@ contracts:
     provides:
       - io/specmatic/examples/store/grpc/order_api/order.proto
       - io/specmatic/examples/store/grpc/order_api/product.proto
+
+report:
+  formatters:
+    - type: ctrf
