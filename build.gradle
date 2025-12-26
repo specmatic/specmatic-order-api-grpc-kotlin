@@ -5,7 +5,7 @@ buildscript {
         protobufVersion = '3.25.8'
         protobufPluginVersion = '0.9.5'
         grpcVersion = '1.63.0'
-        springBootVersion = '3.5.8'
+        springBootVersion = '3.5.9'
         springBootGrpcVersion = '3.1.0.RELEASE'
     }
     dependencies {
