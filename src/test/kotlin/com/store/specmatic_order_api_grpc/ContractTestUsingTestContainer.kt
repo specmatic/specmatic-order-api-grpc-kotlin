@@ -41,7 +41,7 @@ class ContractTestUsingTestContainer {
                 "./build/reports/specmatic",
                 "/usr/src/app/build/reports/specmatic",
                 BindMode.READ_WRITE,
-            ).waitingFor(Wait.forLogMessage(".*Failed Tests.*", 1))
+            ).waitingFor(Wait.forLogMessage(".*Generating CTRF report.*", 1))
             .withNetworkMode("host")
             .withLogConsumer { print(it.utf8String) }
 
