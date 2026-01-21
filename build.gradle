@@ -2,10 +2,10 @@ import org.gradle.plugins.ide.eclipse.model.SourceFolder
 
 buildscript {
     ext {
-        protobufVersion = '3.23.4'
-        protobufPluginVersion = '0.8.18'
+        protobufVersion = '3.25.8'
+        protobufPluginVersion = '0.9.6'
         grpcVersion = '1.63.0'
-        springBootVersion = '3.5.8'
+        springBootVersion = '3.5.9'
         springBootGrpcVersion = '3.1.0.RELEASE'
     }
     dependencies {
@@ -19,9 +19,9 @@ plugins {
     id 'java-library'
     id 'org.springframework.boot' version "${springBootVersion}"
     id 'com.google.protobuf' version "${protobufPluginVersion}"
-    id 'io.spring.dependency-management' version '1.1.5'
-    id 'org.jetbrains.kotlin.jvm' version '1.9.24'
-    id 'org.jetbrains.kotlin.plugin.spring' version '1.9.24'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.jetbrains.kotlin.jvm' version '2.3.0'
+    id 'org.jetbrains.kotlin.plugin.spring' version '2.3.0'
 }
 
 group = 'com.store'
@@ -46,7 +46,7 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.specmatic.grpc:specmatic-grpc:0.1.28'
-    testImplementation "org.testcontainers:junit-jupiter:1.21.3"
+    testImplementation "org.testcontainers:junit-jupiter:1.21.4"
 }
 
 sourceSets {
