@@ -4,6 +4,6 @@
     "id": 20
   },
   "response": {
-    "message" : "Success"
+    "message" : "$match(pattern: (?i)^success$)"
   }
 }

@@ -4,8 +4,8 @@
     "id": 10
   },
   "response": {
-    "id" : 10,
-    "productId" : 100,
+    "id" : "$match(exact: 10)",
+    "productId" : "$match(pattern: ^(0|[1-9]\\d*)$)",
     "count" : 99,
     "status" : "PENDING"
   }
