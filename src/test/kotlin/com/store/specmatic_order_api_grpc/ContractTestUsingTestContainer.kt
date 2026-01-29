@@ -8,6 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.testcontainers.containers.BindMode
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.wait.strategy.Wait
+import org.testcontainers.containers.wait.strategy.WaitStrategy
+import org.testcontainers.images.ImagePullPolicy
+import org.testcontainers.images.PullPolicy
 import org.testcontainers.junit.jupiter.Testcontainers
 
 @Testcontainers
@@ -20,35 +23,24 @@ class ContractTestUsingTestContainer {
     }
 
     private val testContainer: GenericContainer<*> =
-        GenericContainer("specmatic/specmatic-grpc")
+        GenericContainer("specmatic/enterprise")
+            .withImagePullPolicy(PullPolicy.alwaysPull())
             .withCommand(
                 "test",
                 "--host=localhost",
                 "--port=9090",
-                "--examples=./src/test/resources/specmatic",
+                "--examples=src/test/resources/specmatic",
                 "--protoc-version=3.23.4",
                 "--import-path=../"
             ).withEnv(SPECMATIC_GENERATIVE_TESTS, "true")
-            .withFileSystemBind(
-                "./src/test/resources/specmatic",
-                "/usr/src/app/src/test/resources/specmatic",
-                BindMode.READ_ONLY,
-            ).withFileSystemBind(
-                "./specmatic.yaml",
-                "/usr/src/app/specmatic.yaml",
-                BindMode.READ_ONLY,
-            ).withFileSystemBind(
-                "./build/reports/specmatic",
-                "/usr/src/app/build/reports/specmatic",
-                BindMode.READ_WRITE,
-            ).waitingFor(Wait.forLogMessage(".*Generating CTRF report.*", 1))
+            .withFileSystemBind("./", "/usr/src/app", BindMode.READ_WRITE)
+            .waitingFor(Wait.forLogMessage(".*Generating CTRF report.*", 1))
             .withNetworkMode("host")
             .withLogConsumer { print(it.utf8String) }
 
     @Test
     fun specmaticContractTest() {
         testContainer.start()
-        val hasSucceeded = testContainer.logs.contains("Result: FAILED").not()
-        assertThat(hasSucceeded).isTrue()
+        assertThat(testContainer.logs).doesNotContain("Result: FAILED")
     }
 }
