@@ -1,6 +1,5 @@
 package com.store.specmatic_order_api_grpc
 
-import io.specmatic.grpc.SPECMATIC_GENERATIVE_TESTS
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.condition.EnabledIf
@@ -16,33 +15,17 @@ import org.testcontainers.junit.jupiter.Testcontainers
 class ContractTestUsingTestContainer {
     companion object {
         @JvmStatic
-        fun isNonCIOrLinux(): Boolean = System.getenv("CI") != "true" || System.getProperty("os.name").lowercase().contains("linux")
+        fun isNonCIOrLinux(): Boolean =
+            System.getenv("CI") != "true" || System.getProperty("os.name").lowercase().contains("linux")
     }
 
     private val testContainer: GenericContainer<*> =
-        GenericContainer("specmatic/specmatic-grpc")
-            .withCommand(
-                "test",
-                "--host=localhost",
-                "--port=9090",
-                "--examples=./src/test/resources/specmatic",
-                "--protoc-version=3.23.4",
-                "--import-path=../"
-            ).withEnv(SPECMATIC_GENERATIVE_TESTS, "true")
-            .withFileSystemBind(
-                "./src/test/resources/specmatic",
-                "/usr/src/app/src/test/resources/specmatic",
-                BindMode.READ_ONLY,
-            ).withFileSystemBind(
-                "./specmatic.yaml",
-                "/usr/src/app/specmatic.yaml",
-                BindMode.READ_ONLY,
-            ).withFileSystemBind(
-                "./build/reports/specmatic",
-                "/usr/src/app/build/reports/specmatic",
-                BindMode.READ_WRITE,
-            ).waitingFor(Wait.forLogMessage(".*Generating CTRF report.*", 1))
+        GenericContainer("specmatic/enterprise")
+            .withCommand("test")
+            .withFileSystemBind("./src", "/usr/src/app/src", BindMode.READ_ONLY)
+            .withFileSystemBind("./specmatic.yaml", "/usr/src/app/specmatic.yaml", BindMode.READ_ONLY)
             .withNetworkMode("host")
+            .waitingFor(Wait.forLogMessage(".*Tests run:.*", 1))
             .withLogConsumer { print(it.utf8String) }
 
     @Test
