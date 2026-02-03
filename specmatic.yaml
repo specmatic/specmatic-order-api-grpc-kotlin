@@ -6,6 +6,7 @@ contracts:
     provides:
       - specs:
           - io/specmatic/examples/store/grpc/order_api/order.proto
+          - io/specmatic/examples/store/grpc/order_api/product.proto
         specType: protobuf
         config:
           host: localhost
