@@ -45,6 +45,7 @@ If you want to use Docker via TestContainers then you can refer to the `Contract
               ```shell
               docker run --rm --network host -v "$(pwd):/usr/src/app" specmatic/enterprise test
               ```
+              
               - On Windows CMD Prompt:
               ```shell
               docker run --rm --network host -v "%cd%:/usr/src/app" specmatic/enterprise test
