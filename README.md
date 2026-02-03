@@ -36,14 +36,19 @@ If you want to use Docker via TestContainers then you can refer to the `Contract
    git config submodule.recurse true
    ```
 
-4. To run contract tests, 
-   1. Using gradle - `./gradlew clean test`
-   2. Using docker -
-      - Run the application using `./gradlew bootRun`
-      - Run the tests
-      ```shell
-      docker run --network host -v "$(pwd)/specmatic.yaml:/usr/src/app/specmatic.yaml" -v "$(pwd)/build/reports/specmatic:/usr/src/app/build/reports/specmatic" -v "$PWD/src/test/resources/specmatic:/usr/src/app/examples" -e SPECMATIC_GENERATIVE_TESTS=true specmatic/specmatic-grpc test --protoc-version="3.23.4" --port=9090 --host=host.docker.internal --examples=examples
-      ```
+   4. To run contract tests, 
+      1. Using gradle - `./gradlew clean test`
+         2. Using docker -
+            - Run the application using `./gradlew bootRun`
+            - Run the tests
+              - On Unix and Windows Powershell:
+              ```shell
+              docker run --rm --network host -v "$(pwd):/usr/src/app" specmatic/enterprise test
+              ```
+              - On Windows CMD Prompt:
+              ```shell
+              docker run --rm --network host -v "%cd%:/usr/src/app" specmatic/enterprise test
+              ```
 
 5. In case you want to run just the gRPC server using Gradle you can execute
 
