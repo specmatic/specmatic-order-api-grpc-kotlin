@@ -28,15 +28,8 @@ group = 'com.store'
 version = '0.0.1-SNAPSHOT'
 
 repositories {
-    maven {
-        name = "sonatypeSnapshots"
-        url = uri("https://central.sonatype.com/repository/maven-snapshots")
-        mavenContent {
-            snapshotsOnly()
-        }
-    }
     mavenCentral()
-    maven { url "https://repo.specmatic.io/releases" }
+    mavenLocal()
 }
 
 dependencies {
@@ -86,28 +79,6 @@ protobuf {
 kotlin {
     compilerOptions {
         freeCompilerArgs.addAll '-Xjsr305=strict'
-    }
-}
-
-eclipse {
-    classpath {
-        file.beforeMerged { cp ->
-            def generatedGrpcFolder = new SourceFolder('src/generated/main/grpc', null)
-            generatedGrpcFolder.entryAttributes['ignore_optional_problems'] = 'true'
-            cp.entries.add(generatedGrpcFolder)
-            def generatedJavaFolder = new SourceFolder('src/generated/main/java', null)
-            generatedJavaFolder.entryAttributes['ignore_optional_problems'] = 'true'
-            cp.entries.add(generatedJavaFolder)
-        }
-    }
-}
-
-idea {
-    module {
-        sourceDirs += file("src/generated/main/java")
-        sourceDirs += file("src/generated/main/grpc")
-        generatedSourceDirs += file("src/generated/main/java")
-        generatedSourceDirs += file("src/generated/main/grpc")
     }
 }
 
