@@ -4,7 +4,7 @@
     "id": 10000
   },
   "response": {
-    "errorCode": 5,
-    "errorMessage": "Order with ID 10000 was not found"
+    "errorCode": "$match(exact: 5)",
+    "errorMessage": "$match(dataType: string)"
   }
 }
