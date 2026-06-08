@@ -20,6 +20,12 @@ class ContractTestUsingTestContainer {
             System.getenv("CI") != "true" || System.getProperty("os.name").lowercase().contains("linux")
     }
 
+    private fun enterpriseImage(): String =
+        if(!System.getenv("ENTERPRISE_ARTIFACT_URL").isNullOrEmpty())
+            "specmatic/enterprise-snapshot"
+        else
+            "specmatic/enterprise"
+
     private val testContainer: GenericContainer<*> =
         GenericContainer("specmatic/enterprise")
             .withImagePullPolicy(alwaysPull())
