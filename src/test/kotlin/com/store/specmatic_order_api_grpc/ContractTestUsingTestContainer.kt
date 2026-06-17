@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.testcontainers.containers.BindMode
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.wait.strategy.Wait
-import org.testcontainers.images.PullPolicy.alwaysPull
 import org.testcontainers.junit.jupiter.Testcontainers
 
 @Testcontainers
@@ -20,15 +19,9 @@ class ContractTestUsingTestContainer {
             System.getenv("CI") != "true" || System.getProperty("os.name").lowercase().contains("linux")
     }
 
-    private fun enterpriseImage(): String =
-        if(!System.getenv("ENTERPRISE_ARTIFACT_URL").isNullOrEmpty())
-            "specmatic/enterprise-snapshot"
-        else
-            "specmatic/enterprise"
 
     private val testContainer: GenericContainer<*> =
         GenericContainer("specmatic/enterprise")
-            .withImagePullPolicy(alwaysPull())
             .withCommand("test")
             .withFileSystemBind("./src", "/usr/src/app/src", BindMode.READ_ONLY)
             .withFileSystemBind("./specmatic.yaml", "/usr/src/app/specmatic.yaml", BindMode.READ_ONLY)
