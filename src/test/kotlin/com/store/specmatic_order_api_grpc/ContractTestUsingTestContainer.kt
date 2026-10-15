@@ -2,6 +2,7 @@ package com.store.specmatic_order_api_grpc
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.condition.EnabledIf
 import org.springframework.boot.test.context.SpringBootTest
 import org.testcontainers.containers.BindMode
@@ -19,10 +20,15 @@ class ContractTestUsingTestContainer {
             System.getenv("CI") != "true" || System.getProperty("os.name").lowercase().contains("linux")
     }
 
+    @BeforeEach
+    fun awaitApplicationHealth() = waitForGrpcHealth(9090)
+
 
     private val testContainer: GenericContainer<*> =
         GenericContainer("specmatic/enterprise")
             .withCommand("test")
+            .withFileSystemBind("${System.getProperty("user.home")}/.specmatic", "/root/.specmatic", BindMode.READ_ONLY)
+            .withEnv("SPECMATIC_LICENSE_PATH", "/root/.specmatic/specmatic-license.txt")
             .withFileSystemBind("./src", "/usr/src/app/src", BindMode.READ_ONLY)
             .withFileSystemBind("./specmatic.yaml", "/usr/src/app/specmatic.yaml", BindMode.READ_ONLY)
             .withFileSystemBind("./build/reports/specmatic", "/usr/src/app/build/reports/specmatic", BindMode.READ_WRITE)

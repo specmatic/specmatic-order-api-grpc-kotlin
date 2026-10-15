@@ -31,8 +31,10 @@ repositories {
 }
 
 dependencies {
+    implementation platform("io.grpc:grpc-bom:${grpcVersion}")
     implementation "io.grpc:grpc-protobuf:${grpcVersion}"
     implementation "io.grpc:grpc-stub:${grpcVersion}"
+    implementation "io.grpc:grpc-services:${grpcVersion}"
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
