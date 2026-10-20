@@ -26,6 +26,7 @@ group = 'com.store'
 version = '0.0.1-SNAPSHOT'
 
 repositories {
+    maven { url = uri("https://repo.specmatic.io/releases") }
     mavenCentral()
     mavenLocal()
 }
